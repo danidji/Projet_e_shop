@@ -6,14 +6,17 @@ export default function ProductCard(props) {
     // console.log(`ProductCard -> props`, props)
     return (
         <div className="product_card">
-            <Link exact to={'/produit/' + props.id}>
+            <Link className="link_product" exact to={'/produit/' + props.id}>
                 <h3>{props.description}</h3>
-                <img src={props.urlImage} alt="" />
+                <div className="product_image">
+                    <img src={props.urlImage} alt="" />
+                </div>
                 <div className="price">
-                    <p>{props.price} €</p>
-                    <ButtonAddBasket />
+                    <p>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(props.price)}</p>
+                    <ButtonAddBasket className="button_add" />
                 </div>
             </Link>
         </div >
     )
 }
+

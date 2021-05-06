@@ -7,10 +7,12 @@ export default function ProductCard(props) {
     return (
         <div className="product_card">
             <Link exact to={'/produit/' + props.id}>
+                <h3>{props.description}</h3>
                 <img src={props.urlImage} alt="" />
-                <h1>{props.description}</h1>
-                <p>{props.price} €</p>
-                <ButtonAddBasket />
+                <div className="price">
+                    <p>{props.price} €</p>
+                    <ButtonAddBasket />
+                </div>
             </Link>
         </div >
     )

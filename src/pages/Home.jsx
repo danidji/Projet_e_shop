@@ -10,7 +10,7 @@ export default function Home(props) {
 
     return (
         <div className="home_page">
-            < h1 > Bienvenue sur mon site</h1 >
+            < h1 >Accueil</h1 >
             <ProductList products={productDatabase} />
         </div>
 

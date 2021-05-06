@@ -1,4 +1,4 @@
-import './App.sass';
+import './style/App.sass';
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 //import pages 

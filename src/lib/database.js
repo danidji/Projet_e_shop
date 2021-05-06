@@ -20,6 +20,7 @@ export const voucherDatabase = [
 
 
 export function findProduct(productCode) {
+    return productDatabase.find(element => element.productCode === productCode)
 }
 
 export function findVoucher(voucherCode) {

@@ -10,7 +10,7 @@ export default function Product(props) {
     console.log(`Product -> l`, l)
 
     let myProduct = findProduct(p.id);
-    console.log(`Product -> myProduct`, myProduct)
+    // console.log(`Product -> myProduct`, myProduct)
 
 
     return (

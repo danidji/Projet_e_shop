@@ -3,11 +3,11 @@
 
 export const productDatabase = [
 
-    { productCode: 'DBZ', description: 'Dragonball Z Kai - Saga de Boo', unitPrice: 29.90 },
-    { productCode: 'FMA', description: 'Full Metal Alchemist Brotherhood', unitPrice: 19.50 },
-    { productCode: 'SKY', description: 'Skyfall', unitPrice: 22.50 },
-    { productCode: 'OPM', description: 'One Punch Man', unitPrice: 25.70 },
-    { productCode: 'SWT', description: 'Star Wars épisode V', unitPrice: 29.90 }
+    { productCode: 'DBZ', description: 'Dragonball Z Kai - Saga de Boo', unitPrice: 29.90, urlImage: '/images/products/dbz.jpg' },
+    { productCode: 'FMA', description: 'Full Metal Alchemist Brotherhood', unitPrice: 19.50, urlImage: '/images/products/fma.jpg' },
+    { productCode: 'SKY', description: 'Skyfall', unitPrice: 22.50, urlImage: '/images/products/sky.jpg' },
+    { productCode: 'OPM', description: 'One Punch Man', unitPrice: 25.70, urlImage: '/images/products/opm.jpg' },
+    { productCode: 'SWT', description: 'Star Wars épisode V', unitPrice: 29.90, urlImage: '/images/products/swt.jpg' }
 ];
 
 

@@ -13,17 +13,27 @@ import Navbar from './components/Navbar';
 //import contexte 
 import { AppContext } from './AppContext';
 
+//import database 
+import { findProduct } from './lib/database'
+
 
 function App() {
 
   // console.log('app.js', AppContext.Provider);
 
-  //On initialise notre contexte dans un state qui sera envoyer dans la value de AppContext
+  //On initialise notre contexte dans un state qui sera envoyé dans la value de AppContext
   const [state, setState] = useState({
     basket: [],
     voucherRate: null,
 
-    addToBasket: (productCode) => { },
+    addToBasket: (productCode) => {
+
+      //Je récupère l'état de mon panier 
+      let tab = state.basket;
+      tab.push(productCode);
+      //          v-- on spécifie l'état d'avant pour que celui ci ne soit pas écrasé lors du setState
+      setState({ ...state, basket: tab });
+    },
     clearBasket: () => { },
     setVoucherRate: (voucherRate) => { }
   })

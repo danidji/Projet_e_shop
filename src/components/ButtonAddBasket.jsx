@@ -1,19 +1,28 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import React, { useContext } from 'react';
 // import clsx from 'clsx';
 import { PlusCircleOutlined } from '@ant-design/icons';
-<PlusCircleOutlined />
+
+import { AppContext } from '../AppContext';
+
+
 
 
 export default function ButtonAddBasket(props) {
     const l = useLocation();
+    const p = useParams();
+    const context = useContext(AppContext);
 
-    console.log(l.pathname.includes('produit'));
+    const handleclick = (productCode, e) => {
+        e.preventDefault()
+        context.addToBasket(productCode)
+    }
 
     return (
         <>
             {l.pathname.includes('produit')
-                ? <button className={"button_add_basket"} /* onClick={'#'} */>Ajouter</button>
-                : <button className={"button_add_basket "} /* onClick={'#'} */><PlusCircleOutlined /></button>
+                ? <button className={"button_add_basket produit"} onClick={(e) => handleclick(p.id, e)}>Ajouter au panier</button>
+                : <button className={"button_add_basket accueil"} onClick={(e) => handleclick(props.id, e)}><PlusCircleOutlined /></button>
             }
         </>
     )

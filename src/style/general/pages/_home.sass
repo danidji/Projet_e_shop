@@ -6,38 +6,43 @@
     .product_list
         display: grid
         grid-template-columns: 1fr
-        grid-gap: 1rem
+        grid-gap: 2rem
 
         .product_card
 
-            padding: 0.5rem
             background-color: $first-txt-color
             border-radius: 2rem
+            box-shadow: 0.1rem 0.1rem 0.4rem $bgc-color
 
             .link_product
                 display: grid
                 grid-template-columns: 1fr 3fr
-                grid-template-rows: 1fr 2fr
+                grid-template-rows: 1fr 1fr
                 text-decoration: none
                 text-align: center
                 color: $second-txt-color
                 h3
                     grid-column: 2 /span 1
                     grid-row: 1
-                    line-height: 100%
+                    // line-height: 100%
                     font-size: 1.2rem
+                    margin: 0
+                    padding: 0.5rem
+                    align-self: center
+
                     // min-height: 3rem
                 .product_image
                     grid-column: 1
                     grid-row: 1 / span 2
+                    display: flex
                     margin: 0
                     padding: 0
                     img
-
                         width: 100%
+                        height: 100%
                         // border: 0.1px solid $bgc-color
-                        border-radius: 2rem
-                        align-items: center
+                        border-radius: 2rem 0rem 0rem 2rem
+                        align-items: stretch
 
             .price
                 display: flex
@@ -53,33 +58,15 @@
         display: grid !important
         grid-template-columns: 1fr 1fr 1fr !important
         .product_card
-            padding: 0.5rem
-
-            background-color: $first-txt-color
-            border-radius: 2rem
             &:hover
-                background-color: $primary-color-s15
-                box-shadow: 0.1rem 0.1rem 0.9rem $primary-color
-                img
-                    // opacity: 0.5
-
-            a
-                text-decoration: none
-                text-align: center
-                color: $second-txt-color
-                h3
-                    min-height: 3rem
+                box-shadow: 0.2rem 0.2rem 1rem $bgc-color
+        .link_product
+            display: flex !important
+            flex-direction: column
             img
-                width: 100%
-
-            .price
-                display: flex
-                justify-content: space-around
-
-                p
-                    font-weight: bold
-                    font-size: 1.5rem
-                    margin: 0.5rem
+                // width: 100%
+                // height: 100%
+                border-radius: 2rem 2rem 0rem 0rem !important
 
 @media screen and (min-width: 1260px)
     .product_list

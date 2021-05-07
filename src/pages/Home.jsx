@@ -8,12 +8,10 @@ import { useLocation } from 'react-router-dom';
 
 export default function Home(props) {
     const l = useLocation();
-    console.log(`Home -> l`, l)
-
 
     return (
         <div className="home_page">
-            < h1 >Accueil</h1 >
+            < h2 >Accueil</h2 >
             <ProductList products={productDatabase} />
         </div>
 

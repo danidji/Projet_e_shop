@@ -14,7 +14,7 @@ export default function ButtonAddBasket(props) {
     const context = useContext(AppContext);
 
     const handleclick = (productCode, e) => {
-        e.preventDefault()
+        e.preventDefault();
         context.addToBasket(productCode)
     }
 

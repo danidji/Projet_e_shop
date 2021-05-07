@@ -14,7 +14,7 @@ import Navbar from './components/Navbar';
 import { AppContext } from './AppContext';
 
 //import database 
-import { findProduct } from './lib/database'
+// import { findProduct } from './lib/database'
 
 
 function App() {

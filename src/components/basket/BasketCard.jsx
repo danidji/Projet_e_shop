@@ -5,7 +5,7 @@ import SetQuantity from '../SetQuantity';
 
 export default function BasketCard(props) {
     let myProduct = findProduct(props.id);
-    console.log(`BasketCard -> myProduct`, myProduct)
+    // console.log(`BasketCard -> myProduct`, myProduct)
 
 
     return (

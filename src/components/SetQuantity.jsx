@@ -7,7 +7,7 @@ export default function SetQuantity(props) {
 
     const handleclick = (productCode, qty, e) => {
         // e.preventDefault();
-        context.setQuantityBasket(productCode, qty, e)
+        context.setQuantityBasket(productCode, qty, e);
     }
 
     return (

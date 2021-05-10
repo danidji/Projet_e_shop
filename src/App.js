@@ -51,8 +51,6 @@ function App() {
       setState({ ...state, basket: tab });
     }
 
-    , clearBasket: () => { }
-    , setVoucherRate: (voucherRate) => { }
     , setQuantityBasket: (productCode, qty, e) => {
       let newQty = qty;
       let tab = state.basket
@@ -65,9 +63,25 @@ function App() {
         }
 
       })
-      // console.log(`App -> newQty`, tab)
+      console.log(`App -> newQty`, tab)
       setState({ ...state, basket: tab });
+
+      // e.target.classList.contains("less") ? qty-- : qty++
+
+
+      // return qty
+
+
+      // Si mon panier contient le produit, quand je clique j'ajoute ou retire l'élément de mon panier
+      // sinon j'incrémente de 1 ma quantité élémént 
+
+
+
     }
+
+    , clearBasket: () => { }
+    , setVoucherRate: (voucherRate) => { }
+
   })
 
   return (

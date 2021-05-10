@@ -23,19 +23,51 @@ function App() {
 
   //On initialise notre contexte dans un state qui sera envoyé dans la value de AppContext
   const [state, setState] = useState({
-    basket: [],
-    voucherRate: null,
+    basket: []
+    , voucherRate: null
 
-    addToBasket: (productCode) => {
+    , addToBasket: (productCode) => {
 
       //Je récupère l'état de mon panier 
       let tab = state.basket;
-      tab.push(productCode);
+      // let nb = state.basket.qty;
+
+      //On ajoute un élément au panier si non présent sinon on incrémente sa quantité
+      if (typeof (tab.find(element => element.productCode === productCode)) === 'undefined') {
+
+        tab.push({ productCode: productCode, qty: 1 });
+
+      } else {
+
+        tab.forEach(element => {
+          if (element.productCode === productCode) {
+            element.qty++
+          }
+        })
+      }
+      console.log(tab)
+
       //          v-- on spécifie l'état d'avant pour que celui ci ne soit pas écrasé lors du setState
       setState({ ...state, basket: tab });
-    },
-    clearBasket: () => { },
-    setVoucherRate: (voucherRate) => { }
+    }
+
+    , clearBasket: () => { }
+    , setVoucherRate: (voucherRate) => { }
+    , setQuantityBasket: (productCode, qty, e) => {
+      let newQty = qty;
+      let tab = state.basket
+
+      e.target.classList.contains("less") ? newQty-- : newQty++
+
+      tab.forEach(element => {
+        if (element.productCode === productCode) {
+          element.qty = newQty;
+        }
+
+      })
+      // console.log(`App -> newQty`, tab)
+      setState({ ...state, basket: tab });
+    }
   })
 
   return (

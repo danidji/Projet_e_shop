@@ -50,10 +50,11 @@ function App() {
       //          v-- on spécifie l'état d'avant pour que celui ci ne soit pas écrasé lors du setState
       setState({ ...state, basket: tab });
     }
-
+    //A changer de place 
     , setQuantityBasket: (productCode, qty, e) => {
       let newQty = qty;
       let tab = state.basket
+
 
       e.target.classList.contains("less") ? newQty-- : newQty++
 
@@ -63,19 +64,8 @@ function App() {
         }
 
       })
-      console.log(`App -> newQty`, tab)
+      // console.log(`App -> newQty`, tab)
       setState({ ...state, basket: tab });
-
-      // e.target.classList.contains("less") ? qty-- : qty++
-
-
-      // return qty
-
-
-      // Si mon panier contient le produit, quand je clique j'ajoute ou retire l'élément de mon panier
-      // sinon j'incrémente de 1 ma quantité élémént 
-
-
 
     }
 

@@ -1,0 +1,38 @@
+.basket_page
+    display: flex
+    flex-direction: column
+    margin: 2rem 3rem
+    padding: 1rem
+    box-sizing: border-box
+    .basket_list, .basket_total
+        background-color: $first-txt-color
+        padding: 1rem
+        margin-bottom: 1rem
+    .basket_card
+        display: grid
+        grid-template-columns: 8rem 3fr
+        grid-template-rows: 1fr 1fr 1fr
+        border-bottom: 2px solid $secondary-color
+        img
+            grid-row: 1 / span 3
+            grid-column: 1 / span 1
+            width: 100%
+            align-self: center
+            margin: .7rem 0
+        .price
+            font-size: 1rem
+            font-weight: bold
+            align-self: center
+        .pl_2
+            padding-left: 1.6rem
+        .title
+            font-size: 0.8rem
+@media screen and (min-width: 768px)
+    .basket_page
+        display: flex
+        flex-direction: row
+        .basket_list
+            flex-grow: 1
+        .basket_total
+            flex-grow: 1
+            margin-left: 1rem

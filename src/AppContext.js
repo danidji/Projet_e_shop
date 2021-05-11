@@ -8,7 +8,7 @@ export const AppContext = createContext({
     , addToBasket: (productCode) => { }
     , clearBasket: () => { }
     , setVoucherRate: (voucherRate) => { }
-    , setQuantityBasket: () => { }
+    , setQuantityBasket: (productCode, qty, sens, e) => { }
 
 
 });

@@ -51,14 +51,15 @@ function App() {
       setState({ ...state, basket: tab });
     }
     //A changer de place 
-    , setQuantityBasket: (productCode, qty, e) => {
+    , setQuantityBasket: (productCode, qty, sens, e) => {
       let newQty = qty;
       let tab = state.basket
 
 
-      e.target.classList.contains("less") ? newQty-- : newQty++
+      sens === (-1) ? newQty-- : newQty++
 
       tab.forEach(element => {
+        console.log(`App -> e.target.classList.contains("less")`, e.target.classList.contains("less"))
         if (element.productCode === productCode) {
           element.qty = newQty;
         }

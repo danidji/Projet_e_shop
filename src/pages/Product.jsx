@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import { findProduct } from '../lib/database';
 import ButtonAddBasket from '../components/ButtonAddBasket';
-import SetQuantity from '../components/SetQuantity';
-import { AppContext } from '../AppContext'
-import { useContext } from 'react';
+
 
 export default function Product(props) {
     const p = useParams();
-    const l = useLocation();
 
     let myProduct = findProduct(p.id);
     // const context = useContext(AppContext);

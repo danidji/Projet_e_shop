@@ -1,5 +1,5 @@
 import './style/App.sass';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 //import pages 
@@ -70,11 +70,6 @@ function App() {
 
         })
       }
-
-
-
-
-
       // console.log(`App -> newQty`, tab)
       setState({ ...state, basket: tab });
 

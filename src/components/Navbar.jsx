@@ -18,9 +18,16 @@ export default function Navbar(props) {
     function handleHoverBasket(e) {
 
         setState({ getHoverBasket: true });
-        console.log(state);
+        // console.log(state);
+    }
+    function quitHoverBasket() {
+        setState({ getHoverBasket: false });
+        // console.log(state)
     }
 
+    function handleclick() {
+        setState({ getHoverBasket: false });
+    }
 
 
 
@@ -30,11 +37,11 @@ export default function Navbar(props) {
             <li>
                 <ul className="link_page">
                     <li><Link className="link navbar_home" to={'/'}><HomeOutlined /></Link></li>
-                    <li><Link className="link navbar_basket" to={'/panier'} onMouseEnter={(e) => handleHoverBasket(e)}><ShoppingCartOutlined />{context.basket.length > 0 &&
+                    <li><Link className="link navbar_basket" to={'/panier'} onMouseEnter={(e) => handleHoverBasket(e)} onClick={() => handleclick()}><ShoppingCartOutlined />{context.basket.length > 0 &&
                         <span className="nb_product">{context.basket.length}</span>
                     }</Link></li>
                     {state.getHoverBasket &&
-                        <BasketHover />
+                        <BasketHover getHoverBasket={state.getHoverBasket} onMouseLeave={quitHoverBasket} />
                     }
                 </ul>
             </li>

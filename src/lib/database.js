@@ -24,4 +24,5 @@ export function findProduct(productCode) {
 }
 
 export function findVoucher(voucherCode) {
+    return voucherDatabase.find(element => element[voucherCode])
 }

@@ -14,7 +14,7 @@ import Navbar from './components/Navbar';
 import { AppContext } from './AppContext';
 
 //import database 
-// import { findProduct } from './lib/database'
+import { findVoucher } from './lib/database'
 
 
 function App() {
@@ -59,7 +59,6 @@ function App() {
       sens === (-1) ? newQty-- : newQty++
 
       tab.forEach(element => {
-        console.log(`App -> e.target.classList.contains("less")`, e.target.classList.contains("less"))
         if (element.productCode === productCode) {
           element.qty = newQty;
         }
@@ -71,7 +70,15 @@ function App() {
     }
 
     , clearBasket: () => { }
-    , setVoucherRate: (voucherRate) => { }
+    , setVoucherRate: (voucherRate) => {
+      if (findVoucher(voucherRate) !== undefined) {
+        return Object.values((findVoucher(voucherRate)))[0]
+
+      } else {
+        return false
+      }
+
+    }
 
   })
 

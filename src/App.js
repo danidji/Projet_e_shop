@@ -45,7 +45,7 @@ function App() {
           }
         })
       }
-      console.log(tab)
+      // console.log(tab)
 
       //          v-- on spécifie l'état d'avant pour que celui ci ne soit pas écrasé lors du setState
       setState({ ...state, basket: tab });
@@ -58,18 +58,37 @@ function App() {
 
       sens === (-1) ? newQty-- : newQty++
 
-      tab.forEach(element => {
-        if (element.productCode === productCode) {
-          element.qty = newQty;
-        }
+      //Si ma quantité arrive à 0 on supprime l'élément sinon on incrémente la quantité
+      if (newQty === 0) {
+        state.clearBasket(productCode)
+      } else {
 
-      })
+        tab.forEach(element => {
+          if (element.productCode === productCode) {
+            element.qty = newQty;
+          }
+
+        })
+      }
+
+
+
+
+
       // console.log(`App -> newQty`, tab)
       setState({ ...state, basket: tab });
 
     }
 
-    , clearBasket: () => { }
+    , clearBasket: (productCode) => {
+      let basket = state.basket;
+      let elementASupp = basket.find(element => element.productCode === productCode);
+
+      basket.splice(basket.indexOf(elementASupp), 1);
+      // console.log(`App -> newBasket`, basket)
+
+      setState({ ...state, basket: basket });
+    }
     , setVoucherRate: (voucherRate) => {
       if (findVoucher(voucherRate) !== undefined) {
         return Object.values((findVoucher(voucherRate)))[0]

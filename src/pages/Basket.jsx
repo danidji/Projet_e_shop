@@ -7,11 +7,20 @@ import { useContext } from 'react';
 export default function Basket(props) {
     const context = useContext(AppContext);
 
-    return (
-        <div className="basket_page">
-            < BasketList basket={context.basket} />
-            < BasketTotal />
-        </div>
-    )
+    if (context.basket.length > 0) {
+        return (
+            <div className="basket_page">
+                < BasketList basket={context.basket} />
+                < BasketTotal />
+            </div>
+        )
+
+    } else {
+        return (
+            <>
+                <p>Votre panier est vide</p>
+            </>
+        )
+    }
 
 }

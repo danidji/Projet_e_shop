@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
-const stripe = require('stripe');
+
 
 // BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));

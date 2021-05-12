@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../AppContext';
-import BasketHover from './basket/on-hover/BasketHover';
+// import BasketHover from './basket/on-hover/BasketHover';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { HomeOutlined } from '@ant-design/icons';
 

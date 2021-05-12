@@ -10,13 +10,13 @@ module.exports = (app) => {
         let basket = req.body.basket;
         let productDatabase = req.body.productDatabase
 
-
+        //création d'un session pour le paiement 
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [
                 {
                     price_data: {
-                        currency: 'usd',
+                        currency: 'eur',
                         product_data: {
                             name: 'Stubborn Attachments',
                             images: ['https://i.imgur.com/EHyR2nP.png'],
@@ -25,6 +25,28 @@ module.exports = (app) => {
                     },
                     quantity: 1,
                 },
+                {
+                    price_data: {
+                        currency: 'eur',
+                        product_data: {
+                            name: 'Stubborn Attachments',
+                            images: ['https://i.imgur.com/EHyR2nP.png'],
+                        },
+                        unit_amount: 200,
+                    },
+                    quantity: 1,
+                },
+                {
+                    price_data: {
+                        currency: 'eur',
+                        product_data: {
+                            name: 'Stubborn Attachments',
+                            images: ['https://i.imgur.com/EHyR2nP.png'],
+                        },
+                        unit_amount: 20,
+                    },
+                    quantity: 1,
+                }
             ],
             mode: 'payment',
             success_url: `${YOUR_DOMAIN}/success`,

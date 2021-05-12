@@ -30,7 +30,7 @@ export default function BasketTotal(props) {
     }
 
     function getVoucher() {
-        //Si le code saisie est bien un code promo, et si aucun code n'a été utilisé, j'applique celui sur le total
+        //Si le code saisie est bien un code promo, et si aucun code n'a été utilisé, j'applique celui ci sur le total
         // console.log(`getVoucher -> state.inputValue`, state.inputValue)
         if (context.setVoucherRate(state.inputValue) && !state.useVoucherRate) {
 

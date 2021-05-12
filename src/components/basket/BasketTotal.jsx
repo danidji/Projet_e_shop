@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../../AppContext';
 import { findProduct } from '../../lib/database';
 import VoucherRate from './VoucherRate';
+import ButtonPaid from './ButtonPay';
 // import { findVoucher } from '../../lib/database'
 export default function BasketTotal(props) {
 
@@ -76,6 +77,7 @@ export default function BasketTotal(props) {
             <p>Tva 5.5% - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.tva)}</p>
             <VoucherRate onChange={handleChange} onClick={() => getVoucher()} val={state.inputValue} infoVoucher={state.infoVoucher} />
             <p>Prix TTC - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.totalPrice)}</p>
+            <ButtonPaid />
         </div>
 
     )

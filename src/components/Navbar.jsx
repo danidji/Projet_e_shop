@@ -40,9 +40,9 @@ export default function Navbar(props) {
                     <li><Link className="link navbar_basket" to={'/panier'} onMouseEnter={(e) => handleHoverBasket(e)} onClick={() => handleclick()}><ShoppingCartOutlined />{context.basket.length > 0 &&
                         <span className="nb_product">{context.basket.length}</span>
                     }</Link></li>
-                    {state.getHoverBasket &&
+                    {/* {state.getHoverBasket &&
                         <BasketHover getHoverBasket={state.getHoverBasket} onMouseLeave={quitHoverBasket} />
-                    }
+                    } */}
                 </ul>
             </li>
         </ul>

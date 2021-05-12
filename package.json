@@ -20,8 +20,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"nodemon server.js\" \"react-scripts start\""
   },
+  "proxy": "http://localhost:3030",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -42,6 +44,10 @@
   },
   "devDependencies": {
     "axios": "^0.21.1",
-    "axios-mock-adapter": "^1.19.0"
+    "axios-mock-adapter": "^1.19.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "stripe": "^8.148.0"
   }
 }

@@ -23,7 +23,7 @@ function App() {
 
   //On initialise notre contexte dans un state qui sera envoyé dans la value de AppContext
   const [state, setState] = useState({
-    basket: []
+    basket: JSON.parse(localStorage.getItem('basket')) //on initialise le panier avec le contenue du local storage 
     , voucherRate: null
 
     , addToBasket: (productCode) => {
@@ -45,10 +45,18 @@ function App() {
           }
         })
       }
-      // console.log(tab)
 
       //          v-- on spécifie l'état d'avant pour que celui ci ne soit pas écrasé lors du setState
       setState({ ...state, basket: tab });
+      //Enregistrement dans le local storage
+      localStorage.setItem('basket', JSON.stringify(tab))
+
+      //récupération du panier dans le local storage 
+      // let basketStorage = JSON.parse(localStorage.getItem('basket'))
+
+      // console.log(`App -> basketStorage`, basketStorage, typeof basketStorage)
+
+
     }
     //A changer de place 
     , setQuantityBasket: (productCode, qty, sens, e) => {
@@ -60,6 +68,10 @@ function App() {
 
       //Si ma quantité arrive à 0 on supprime l'élément sinon on incrémente la quantité
       if (newQty === 0) {
+        console.log(`App -> tab`, tab)
+        console.log(`App -> tab`, tab)
+        console.log(`App -> tab`, tab)
+        console.log(`App -> tab`, tab)
         state.clearBasket(productCode)
       } else {
 
@@ -83,6 +95,8 @@ function App() {
       // console.log(`App -> newBasket`, basket)
 
       setState({ ...state, basket: basket });
+      //Mise à jour du panier dans le local storage
+      localStorage.setItem('basket', JSON.stringify(basket))
     }
     , setVoucherRate: (voucherRate) => {
       if (findVoucher(voucherRate) !== undefined) {

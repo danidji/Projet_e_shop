@@ -17,11 +17,10 @@ export default function ButtonPay(props) {
     async function handleclick() {
 
         const stripe = await stripePromise;
+        //Génération de la route pour procéder au paiement
+        //  => envoi du panier dans le req.body
+        axios.post('/proceder-paiement', { basket }).then((response) => {
 
-        await axios.post('/proceder-paiement', { basket }).then((response) => {
-
-            console.log(response);
-            // return response.json();
             return stripe.redirectToCheckout({ sessionId: response.data.id });
         })
 

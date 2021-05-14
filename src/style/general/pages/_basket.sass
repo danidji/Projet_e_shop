@@ -8,6 +8,8 @@
         background-color: $first-txt-color
         padding: 1rem
         margin-bottom: 1rem
+        h3
+            text-transform: uppercase
     .basket_card
         display: grid
         grid-template-columns: 8rem 3fr
@@ -23,10 +25,13 @@
             font-size: 1rem
             font-weight: bold
             align-self: center
+            .close
+                color: red
+                font-weight: bold
         .pl_2
             padding-left: 1.6rem
         .title
-            font-size: 0.8rem
+            font-size: 1.4rem
 @media screen and (min-width: 768px)
     .basket_page
         display: flex
@@ -36,3 +41,5 @@
         .basket_total
             flex-grow: 1
             margin-left: 1rem
+@media screen and (min-width: 1260px)
+    .basket_page

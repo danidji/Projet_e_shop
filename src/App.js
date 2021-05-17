@@ -6,6 +6,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home'
 import Basket from './pages/Basket'
 import Product from './pages/Product'
+import Erreur404 from './pages/Erreur404'
 
 //import composants
 import Navbar from './components/Navbar';
@@ -23,7 +24,7 @@ function App() {
 
   //On initialise notre contexte dans un state qui sera envoyé dans la value de AppContext
   const [state, setState] = useState({
-    basket: JSON.parse(localStorage.getItem('basket')) //on initialise le panier avec le contenue du local storage 
+    basket: JSON.parse(localStorage.getItem('basket')) ? JSON.parse(localStorage.getItem('basket')) : []   //on initialise le panier avec le contenue du local storage 
     , voucherRate: null
 
     , addToBasket: (productCode) => {
@@ -53,10 +54,6 @@ function App() {
 
       //récupération du panier dans le local storage 
       // let basketStorage = JSON.parse(localStorage.getItem('basket'))
-
-      // console.log(`App -> basketStorage`, basketStorage, typeof basketStorage)
-
-
     }
     //A changer de place 
     , setQuantityBasket: (productCode, qty, sens, e) => {
@@ -98,6 +95,12 @@ function App() {
       //Mise à jour du panier dans le local storage
       localStorage.setItem('basket', JSON.stringify(basket))
     }
+    , clearAllBasket: () => {
+      let tab = [];
+      // localStorage.setItem('basket', JSON.stringify(tab))
+      localStorage.removeItem('basket');
+      setState({ ...state, basket: [] });
+    }
     , setVoucherRate: (voucherRate) => {
       if (findVoucher(voucherRate) !== undefined) {
         return Object.values((findVoucher(voucherRate)))[0]
@@ -128,6 +131,18 @@ function App() {
 
           <Route exact path="/produit/:id">
             <Product />
+          </Route>
+
+          <Route exact path="/success">
+            <Home />
+          </Route>
+
+          <Route exact path="/cancel">
+            <Basket />
+          </Route>
+
+          <Route>
+            <Erreur404 />
           </Route>
 
 

@@ -28,19 +28,43 @@ module.exports = class Checkout {
 
 
         try {
-            const coupon = await stripe.coupons.create({
-                percent_off: this.voucher,
+            // const coupon = await stripe.coupons.create({
+            //     percent_off: this.voucher,
+            //     duration: 'once',
+            // });
+            const coupon12 = await stripe.coupons.create({
+                percent_off: 12,
                 duration: 'once',
             });
-            console.log(`Checkout -> createSession -> coupon`, coupon)
+            const coupon15 = await stripe.coupons.create({
+                percent_off: 15,
+                duration: 'once',
+            });
+            const coupon25 = await stripe.coupons.create({
+                percent_off: 25,
+                duration: 'once',
+            });
+            const promotionCode12 = await stripe.promotionCodes.create({
+                coupon: coupon12.id,
+                code: 'NOEL2020',
+            });
+            const promotionCode15 = await stripe.promotionCodes.create({
+                coupon: coupon15.id,
+                code: 'ANNIVERSAIRE',
+            });
+            const promotionCode25 = await stripe.promotionCodes.create({
+                coupon: coupon25.id,
+                code: 'SOLDES_ETE',
+            });
 
             const session = await stripe.checkout.sessions.create({
                 payment_method_types: ['card'],
                 line_items: this.returnlineItems()
                 , mode: 'payment',
-                discounts: [{
-                    coupon: coupon.id,
-                }],
+                // discounts: [{
+                //     coupon: coupon.id,
+                // }],
+                allow_promotion_codes: true,
                 success_url: `${YOUR_DOMAIN}/success`,
                 cancel_url: `${YOUR_DOMAIN}/cancel`,
             });

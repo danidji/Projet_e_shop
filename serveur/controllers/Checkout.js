@@ -3,10 +3,11 @@ const db = require('../db');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 module.exports = class Checkout {
-    constructor(basket) {
+    constructor(basket, voucher) {
         this.basket = basket;
+        this.voucher = voucher;
     }
-    returnlineItems(basket) {
+    returnlineItems() {
         return this.basket.map((element) => {
             let product = db.findProduct(element.productCode);
 
@@ -24,17 +25,28 @@ module.exports = class Checkout {
         })
     }
     async createSession(req, res) {
+
+
         try {
+            const coupon = await stripe.coupons.create({
+                percent_off: this.voucher,
+                duration: 'once',
+            });
+            console.log(`Checkout -> createSession -> coupon`, coupon)
+
             const session = await stripe.checkout.sessions.create({
                 payment_method_types: ['card'],
-                line_items: this.returnlineItems(this.basket)
+                line_items: this.returnlineItems()
                 , mode: 'payment',
+                discounts: [{
+                    coupon: coupon.id,
+                }],
                 success_url: `${YOUR_DOMAIN}/success`,
                 cancel_url: `${YOUR_DOMAIN}/cancel`,
             });
             res.json({ id: session.id });
         } catch (err) {
-            console.log('erreur', err);
+            console.log('erreur', err.message);
         }
     }
 }

@@ -24,14 +24,13 @@ function App() {
 
   //On initialise notre contexte dans un state qui sera envoyé dans la value de AppContext
   const [state, setState] = useState({
-    basket: JSON.parse(localStorage.getItem('basket')) ? JSON.parse(localStorage.getItem('basket')) : []   //on initialise le panier avec le contenue du local storage 
+    basket: JSON.parse(localStorage.getItem('basket')) ? JSON.parse(localStorage.getItem('basket')) : []   //on initialise le panier avec le contenue du local storage ou un tableau vide si il n'y a rien dans le local storage
     , voucherRate: null
 
     , addToBasket: (productCode) => {
 
       //Je récupère l'état de mon panier 
       let tab = state.basket;
-      // let nb = state.basket.qty;
 
       //On ajoute un élément au panier si non présent sinon on incrémente sa quantité
       if (typeof (tab.find(element => element.productCode === productCode)) === 'undefined') {
@@ -55,6 +54,8 @@ function App() {
       //récupération du panier dans le local storage 
       // let basketStorage = JSON.parse(localStorage.getItem('basket'))
     }
+
+
     //A changer de place 
     , setQuantityBasket: (productCode, qty, sens, e) => {
       let newQty = qty;
@@ -84,26 +85,34 @@ function App() {
 
     }
 
+
+    //Suppression d'un article du panier 
     , clearBasket: (productCode) => {
       let basket = state.basket;
       let elementASupp = basket.find(element => element.productCode === productCode);
 
       basket.splice(basket.indexOf(elementASupp), 1);
-      // console.log(`App -> newBasket`, basket)
 
       setState({ ...state, basket: basket });
+
       //Mise à jour du panier dans le local storage
       localStorage.setItem('basket', JSON.stringify(basket))
     }
+
+
+    // Suppression de l'ensemble du panier 
     , clearAllBasket: () => {
-      let tab = [];
-      // localStorage.setItem('basket', JSON.stringify(tab))
       localStorage.removeItem('basket');
       setState({ ...state, basket: [] });
     }
+
+    //Retourne le code promo si exact
     , setVoucherRate: (voucherRate) => {
       if (findVoucher(voucherRate) !== undefined) {
-        return Object.values((findVoucher(voucherRate)))[0]
+        let voucher = Object.values((findVoucher(voucherRate)))[0]
+
+        setState({ ...state, voucherRate: voucher })
+        return voucher
 
       } else {
         return false

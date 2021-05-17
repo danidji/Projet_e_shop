@@ -7,7 +7,7 @@ export default function VoucherRate(props) {
                 <input type="text" className="voucher_rate" placeholder="Entrer un code promo :" onChange={props.onChange} value={props.val} />
                 {!props.use
                     ? <button onClick={props.onClick}>ok</button>
-                    : <button onClick={props.onClick}>X</button>
+                    : <button onClick={props.onClickDelete}>X</button>
                 }
             </div>
             <p className="info">{props.infoVoucher}</p>

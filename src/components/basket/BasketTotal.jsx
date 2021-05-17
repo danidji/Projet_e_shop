@@ -48,6 +48,13 @@ export default function BasketTotal(props) {
             setState({ ...state, totalPrice: getTotal(), tva: getTva(getTotal()), HTprice: getTotal() - getTva(getTotal()), infoVoucher: 'Code promo non valide' })
         }
     }
+
+
+    function removeVoucher() {
+        setState({ ...state, totalPrice: getTotal(), tva: getTva(getTotal()), HTprice: getTotal() - getTva(getTotal()), inputValue: "", useVoucherRate: false, infoVoucher: "" })
+    }
+
+
     function handleChange(e) {
 
         setState({ ...state, inputValue: e.target.value })
@@ -59,12 +66,17 @@ export default function BasketTotal(props) {
 
     //Lorsque que le panier change, on applique le nouveau total
     useEffect(() => {
+        let total = getTotal()
+
+        if (state.useVoucherRate) {
+            total = total - (context.setVoucherRate(state.inputValue) * total)
+        }
 
         setState({
             ...state
-            , totalPrice: getTotal()
-            , tva: getTva(getTotal())
-            , HTprice: getTotal() - getTva(getTotal())
+            , totalPrice: total
+            , tva: getTva(total)
+            , HTprice: total - getTva(total)
         })
 
     }, [context])
@@ -75,7 +87,7 @@ export default function BasketTotal(props) {
             <h3>Total</h3>
             <p>Prix ht - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.HTprice)}</p>
             <p>Tva 5.5% - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.tva)}</p>
-            <VoucherRate onChange={handleChange} onClick={() => getVoucher()} val={state.inputValue} infoVoucher={state.infoVoucher} use={state.useVoucherRate} />
+            <VoucherRate onChange={handleChange} onClick={() => getVoucher()} val={state.inputValue} onClickDelete={removeVoucher} infoVoucher={state.infoVoucher} use={state.useVoucherRate} />
             <p>Prix TTC - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.totalPrice)}</p>
             <ButtonPay />
         </div>

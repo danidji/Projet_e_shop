@@ -9,6 +9,7 @@ export const AppContext = createContext({
     , clearBasket: () => { }
     , setVoucherRate: (voucherRate) => { }
     , setQuantityBasket: (productCode, qty, sens, e) => { }
+    , clearAllBasket: () => { }
 
 
 });

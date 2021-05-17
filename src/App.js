@@ -2,6 +2,9 @@ import './style/App.sass';
 import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 //import pages 
 import Home from './pages/Home'
 import Basket from './pages/Basket'
@@ -48,6 +51,8 @@ function App() {
 
       //          v-- on spécifie l'état d'avant pour que celui ci ne soit pas écrasé lors du setState
       setState({ ...state, basket: tab });
+      //Afficher une notif 
+      toast.success('Produit ajouté au panier')
       //Enregistrement dans le local storage
       localStorage.setItem('basket', JSON.stringify(tab))
 
@@ -106,18 +111,10 @@ function App() {
       setState({ ...state, basket: [] });
     }
 
+
     //Retourne le code promo si exact
     , setVoucherRate: (voucherRate) => {
-      if (findVoucher(voucherRate) !== undefined) {
-        let voucher = Object.values((findVoucher(voucherRate)))[0]
-
-        setState({ ...state, voucherRate: voucher })
-        return voucher
-
-      } else {
-        return false
-      }
-
+      setState({ ...state, voucherRate: voucherRate })
     }
 
   })

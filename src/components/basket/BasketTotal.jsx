@@ -75,7 +75,7 @@ export default function BasketTotal(props) {
             <h3>Total</h3>
             <p>Prix ht - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.HTprice)}</p>
             <p>Tva 5.5% - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.tva)}</p>
-            <VoucherRate onChange={handleChange} onClick={() => getVoucher()} val={state.inputValue} infoVoucher={state.infoVoucher} />
+            <VoucherRate onChange={handleChange} onClick={() => getVoucher()} val={state.inputValue} infoVoucher={state.infoVoucher} use={state.useVoucherRate} />
             <p>Prix TTC - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.totalPrice)}</p>
             <ButtonPay />
         </div>

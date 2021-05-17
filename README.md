@@ -2,5 +2,4 @@
 
 ## To-do list
 - Finir un affichage du panier en hover sur l'icone panier 
-- Changer la police
-- Finir le paiement via stripe
+- Finir le traitement des code promo avec stripe (cas ou le paiement se fait sans coupon)

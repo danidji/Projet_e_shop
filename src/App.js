@@ -2,7 +2,7 @@ import './style/App.sass';
 import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 //import pages 
@@ -18,7 +18,7 @@ import Navbar from './components/Navbar';
 import { AppContext } from './AppContext';
 
 //import database 
-import { findVoucher } from './lib/database'
+// import { findVoucher } from './lib/database'
 
 
 function App() {
@@ -71,10 +71,6 @@ function App() {
 
       //Si ma quantité arrive à 0 on supprime l'élément sinon on incrémente la quantité
       if (newQty === 0) {
-        console.log(`App -> tab`, tab)
-        console.log(`App -> tab`, tab)
-        console.log(`App -> tab`, tab)
-        console.log(`App -> tab`, tab)
         state.clearBasket(productCode)
       } else {
 
@@ -85,8 +81,7 @@ function App() {
 
         })
       }
-      // console.log(`App -> newQty`, tab)
-      setState({ ...state, basket: tab });
+      setState((state) => { return { ...state, basket: tab } });
 
     }
 
@@ -115,6 +110,10 @@ function App() {
     //Retourne le code promo si exact
     , setVoucherRate: (voucherRate) => {
       setState({ ...state, voucherRate: voucherRate })
+    }
+    //Supprime le code promo
+    , removeVoucher: () => {
+      setState({ ...state, voucherRate: null })
     }
 
   })

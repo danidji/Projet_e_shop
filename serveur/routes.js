@@ -7,7 +7,7 @@ module.exports = (app) => {
         if (req.body.voucherRate !== null) {
             voucher = req.body.voucherRate * 100;
         }
-        console.log(`app.post -> req.body`, req.body)
+        // console.log(`app.post -> req.body`, req.body)
         console.log(`app.post -> voucher`, voucher)
         // console.log(`app.post -> req.body`, req.body)
 

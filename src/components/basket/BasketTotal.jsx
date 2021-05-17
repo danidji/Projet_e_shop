@@ -14,8 +14,10 @@ export default function BasketTotal(props) {
         , infoVoucher: ""
         , useVoucher: false
     })
+    console.log(`BasketTotal -> state`, state)
 
     const context = useContext(AppContext);
+    console.log(`BasketTotal -> context`, context)
     let basket = context.basket;
     // Retourne le total du panier
     function getTotal() {
@@ -31,7 +33,7 @@ export default function BasketTotal(props) {
 
     function getVoucher() {
 
-        //Si le code saisie est bien un code promo, et si aucun code n'a été utilisé, j'applique celui ci sur le total
+        //Si le code saisie est bien un code promo, j'applique celui ci sur le total
         if (findVoucher(state.inputValue)) {
 
             let voucher = findVoucher(state.inputValue)
@@ -44,21 +46,20 @@ export default function BasketTotal(props) {
         }
         //sinon je retourne le total normal    
         else {
-            setState({ ...state, totalPrice: getTotal(), tva: getTva(getTotal()), HTprice: getTotal() - getTva(getTotal()), infoVoucher: 'Code promo non valide' })
+            setState({ ...state, totalPrice: getTotal(), tva: getTva(getTotal()), HTprice: getTotal() - getTva(getTotal()), infoVoucher: 'Code promo non valide' });
         }
         console.log(state);
     }
 
-
+    //Supprimer la promo au clic sur 'X'
     function removeVoucher() {
-        setState({ ...state, totalPrice: getTotal(), tva: getTva(getTotal()), HTprice: getTotal() - getTva(getTotal()), inputValue: "", infoVoucher: "", useVoucher: false })
+        context.removeVoucher();
+        setState({ ...state, totalPrice: getTotal(), tva: getTva(getTotal()), HTprice: getTotal() - getTva(getTotal()), inputValue: "", infoVoucher: "", useVoucher: false });
     }
 
-
+    //Enregistrement de la valeur saisie dans l'input Voucher
     function handleChange(e) {
-
-        setState({ ...state, inputValue: e.target.value })
-
+        setState({ ...state, inputValue: e.target.value });
 
         // permet de gerer le state de manière synchrone pour récupérer la dernière valeur connue du state
         // setState((state) => { return { ...state, inputValue: e.target.value } })

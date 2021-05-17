@@ -12,7 +12,6 @@ export const productDatabase = [
 
 
 export const voucherDatabase = [
-
     { 'NOEL2020': 0.12 },
     { 'ANNIVERSAIRE': 0.15 },
     { 'SOLDES_ETE': 0.25 }
@@ -23,6 +22,14 @@ export function findProduct(productCode) {
     return productDatabase.find(element => element.productCode === productCode)
 }
 
+
 export function findVoucher(voucherCode) {
-    return voucherDatabase.find(element => element[voucherCode])
+    for (let elt of voucherDatabase) {
+        if (voucherCode in elt) {
+            // console.log(`findVoucher `, elt[voucherCode])
+
+            return elt[voucherCode]
+        }
+    }
+    return false
 }

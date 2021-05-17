@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../../AppContext';
-import { findProduct } from '../../lib/database';
+import { findProduct, findVoucher } from '../../lib/database';
 import VoucherRate from './VoucherRate';
 import ButtonPay from './ButtonPay';
 // import { findVoucher } from '../../lib/database'
@@ -11,13 +11,12 @@ export default function BasketTotal(props) {
         , tva: 0
         , HTprice: 0
         , inputValue: ""
-        , useVoucherRate: false
         , infoVoucher: ""
+        , useVoucher: false
     })
 
     const context = useContext(AppContext);
     let basket = context.basket;
-    // context.clearBasket('SKY')
     // Retourne le total du panier
     function getTotal() {
         let total = basket.map((element) => {
@@ -31,27 +30,28 @@ export default function BasketTotal(props) {
     }
 
     function getVoucher() {
-        //Si le code saisie est bien un code promo, et si aucun code n'a été utilisé, j'applique celui ci sur le total
-        // console.log(`getVoucher -> state.inputValue`, state.inputValue)
-        if (context.setVoucherRate(state.inputValue) && !state.useVoucherRate) {
 
-            let voucher = context.setVoucherRate(state.inputValue)
+        //Si le code saisie est bien un code promo, et si aucun code n'a été utilisé, j'applique celui ci sur le total
+        if (findVoucher(state.inputValue)) {
+
+            let voucher = findVoucher(state.inputValue)
             //calcul nouveau total
             let newTotal = state.totalPrice - (voucher * state.totalPrice)
-            setState({ ...state, totalPrice: newTotal, tva: getTva(newTotal), HTprice: newTotal - getTva(newTotal), useVoucherRate: true, infoVoucher: `Promo de -${voucher * 100}% appliqué` });
-        } else if (context.setVoucherRate(state.inputValue) && state.useVoucherRate) {
-            setState({ ...state, infoVoucher: 'Code promo déjà utilisé' })
-        }
+            setState({ ...state, totalPrice: newTotal, tva: getTva(newTotal), HTprice: newTotal - getTva(newTotal), infoVoucher: `Promo de -${voucher * 100}% appliqué`, useVoucher: true });
 
+            //On stocke le voucher dans le contexte pour l'envoyer au back
+            context.setVoucherRate(voucher);
+        }
         //sinon je retourne le total normal    
         else {
             setState({ ...state, totalPrice: getTotal(), tva: getTva(getTotal()), HTprice: getTotal() - getTva(getTotal()), infoVoucher: 'Code promo non valide' })
         }
+        console.log(state);
     }
 
 
     function removeVoucher() {
-        setState({ ...state, totalPrice: getTotal(), tva: getTva(getTotal()), HTprice: getTotal() - getTva(getTotal()), inputValue: "", useVoucherRate: false, infoVoucher: "" })
+        setState({ ...state, totalPrice: getTotal(), tva: getTva(getTotal()), HTprice: getTotal() - getTva(getTotal()), inputValue: "", infoVoucher: "", useVoucher: false })
     }
 
 
@@ -68,8 +68,8 @@ export default function BasketTotal(props) {
     useEffect(() => {
         let total = getTotal()
         //Si j'ai un code promo d'appliqué, je l'applique sur mon total
-        if (state.useVoucherRate) {
-            total = total - (context.setVoucherRate(state.inputValue) * total)
+        if (findVoucher(state.inputValue) !== false) {
+            total = total - (findVoucher(state.inputValue) * total)
         }
 
         setState({
@@ -87,7 +87,7 @@ export default function BasketTotal(props) {
             <h3>Total</h3>
             <p>Prix ht - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.HTprice)}</p>
             <p>Tva 5.5% - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.tva)}</p>
-            <VoucherRate onChange={handleChange} onClick={() => getVoucher()} val={state.inputValue} onClickDelete={removeVoucher} infoVoucher={state.infoVoucher} use={state.useVoucherRate} />
+            <VoucherRate onChange={handleChange} onClick={() => getVoucher()} val={state.inputValue} onClickDelete={removeVoucher} infoVoucher={state.infoVoucher} use={state.useVoucher} />
             <p>Prix TTC - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.totalPrice)}</p>
             <ButtonPay />
         </div>

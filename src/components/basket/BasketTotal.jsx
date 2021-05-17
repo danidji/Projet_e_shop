@@ -67,7 +67,7 @@ export default function BasketTotal(props) {
     //Lorsque que le panier change, on applique le nouveau total
     useEffect(() => {
         let total = getTotal()
-
+        //Si j'ai un code promo d'appliqué, je l'applique sur mon total
         if (state.useVoucherRate) {
             total = total - (context.setVoucherRate(state.inputValue) * total)
         }

@@ -12,6 +12,8 @@ const stripePromise = loadStripe('pk_test_51IqE57LfOA7FkbGkmubyopsSrUpBv3v2x4hRu
 export default function ButtonPay(props) {
     const context = useContext(AppContext);
     let basket = context.basket;
+    let voucherRate = context.voucherRate
+    // console.log(`ButtonPay -> voucherRate`, voucherRate)
 
 
     async function handleclick() {
@@ -19,7 +21,7 @@ export default function ButtonPay(props) {
         const stripe = await stripePromise;
         //Génération de la route pour procéder au paiement
         //  => envoi du panier dans le req.body
-        axios.post('/proceder-paiement', { basket }).then((response) => {
+        axios.post('/proceder-paiement', { basket, voucherRate }).then((response) => {
 
             return stripe.redirectToCheckout({ sessionId: response.data.id });
         })

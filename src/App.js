@@ -29,11 +29,12 @@ function App() {
   const [state, setState] = useState({
     basket: JSON.parse(localStorage.getItem('basket')) ? JSON.parse(localStorage.getItem('basket')) : []   //on initialise le panier avec le contenue du local storage ou un tableau vide si il n'y a rien dans le local storage
     , voucherRate: null
+    , voucherName: ""
 
     , addToBasket: (productCode) => {
 
       //Je récupère l'état de mon panier 
-      let tab = state.basket;
+      let tab = state.basket; // => S'écrit plutot [...state.basket] ([...this.state.basket] pour une class composante)
 
       //On ajoute un élément au panier si non présent sinon on incrémente sa quantité
       if (typeof (tab.find(element => element.productCode === productCode)) === 'undefined') {
@@ -108,8 +109,8 @@ function App() {
 
 
     //Retourne le code promo si exact
-    , setVoucherRate: (voucherRate) => {
-      setState({ ...state, voucherRate: voucherRate })
+    , setVoucherRate: (voucherRate, voucherName) => {
+      setState({ ...state, voucherRate: voucherRate, voucherName: voucherName })
     }
     //Supprime le code promo
     , removeVoucher: () => {

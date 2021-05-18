@@ -8,7 +8,7 @@ module.exports = (app) => {
             voucher = req.body.voucherRate * 100;
         }
         // console.log(`app.post -> req.body`, req.body)
-        console.log(`app.post -> voucher`, voucher)
+        console.log(`app.post -> voucher`, req.body.voucherName)
         // console.log(`app.post -> req.body`, req.body)
 
         //création d'une session pour le paiement

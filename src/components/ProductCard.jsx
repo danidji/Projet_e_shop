@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ButtonAddBasket from './ButtonAddBasket';
+import { setCurrency } from '../lib/utilities';
 
 export default function ProductCard(props) {
     // console.log(`ProductCard -> props`, props)
@@ -12,7 +13,7 @@ export default function ProductCard(props) {
                 </div>
                 <h3>{props.description}</h3>
                 <div className="price">
-                    <p>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(props.price)}</p>
+                    <p>{setCurrency(props.price)}</p>
                     <ButtonAddBasket className="button_add" id={props.id} />
                 </div>
             </Link>

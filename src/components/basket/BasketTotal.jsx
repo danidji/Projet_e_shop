@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../../AppContext';
 import { findProduct, findVoucher } from '../../lib/database';
+import { setCurrency } from '../../lib/utilities';
 import VoucherRate from './VoucherRate';
 import ButtonPay from './ButtonPay';
 // import { findVoucher } from '../../lib/database'
@@ -14,10 +15,10 @@ export default function BasketTotal(props) {
         , infoVoucher: ""
         , useVoucher: false
     })
-    console.log(`BasketTotal -> state`, state)
+    // console.log(`BasketTotal -> state`, state)
 
     const context = useContext(AppContext);
-    console.log(`BasketTotal -> context`, context)
+    // console.log(`BasketTotal -> context`, context)
     let basket = context.basket;
     // Retourne le total du panier
     function getTotal() {
@@ -42,7 +43,7 @@ export default function BasketTotal(props) {
             setState({ ...state, totalPrice: newTotal, tva: getTva(newTotal), HTprice: newTotal - getTva(newTotal), infoVoucher: `Promo de -${voucher * 100}% appliqué`, useVoucher: true });
 
             //On stocke le voucher dans le contexte pour l'envoyer au back
-            context.setVoucherRate(voucher);
+            context.setVoucherRate(voucher, state.inputValue);
         }
         //sinon je retourne le total normal    
         else {
@@ -86,10 +87,10 @@ export default function BasketTotal(props) {
 
         <div className="basket_total">
             <h3>Total</h3>
-            <p>Prix ht - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.HTprice)}</p>
-            <p>Tva 5.5% - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.tva)}</p>
+            <p>Prix ht - {setCurrency(state.HTprice)}</p>
+            <p>Tva 5.5% - {setCurrency(state.tva)}</p>
             <VoucherRate onChange={handleChange} onClick={() => getVoucher()} val={state.inputValue} onClickDelete={removeVoucher} infoVoucher={state.infoVoucher} use={state.useVoucher} />
-            <p>Prix TTC - {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(state.totalPrice)}</p>
+            <p>Prix TTC - {setCurrency(state.totalPrice)}</p>
             <ButtonPay />
         </div>
 

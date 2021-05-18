@@ -10,7 +10,7 @@ export default function VoucherRate(props) {
                     : <button onClick={props.onClickDelete}>X</button>
                 }
             </div>
-            <p className="info">{props.infoVoucher}</p>
+            <small className="info">{props.infoVoucher}</small>
         </div>
     )
 }

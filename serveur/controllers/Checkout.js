@@ -28,10 +28,7 @@ module.exports = class Checkout {
 
 
         try {
-            const coupon = await stripe.coupons.create({
-                percent_off: this.voucher,
-                duration: 'once',
-            });
+
             const session = await stripe.checkout.sessions.create({
                 payment_method_types: ['card'],
                 line_items: this.returnlineItems()
@@ -42,14 +39,22 @@ module.exports = class Checkout {
                 success_url: `${YOUR_DOMAIN}/success`,
                 cancel_url: `${YOUR_DOMAIN}/cancel`,
             });
+            console.log(`Checkout -> createSession -> session`, session)
+            // console.log(`Checkout -> createSession -> req.body.voucherRate `, req.body.voucherRate)
             if (req.body.voucherRate !== null) {
+
+                const coupon = await stripe.coupons.create({
+                    percent_off: this.voucher,
+                    duration: 'once',
+                });
+                console.log("et ouaiiiis")
                 session.discounts = [{
                     coupon: coupon.id
                 }]
             }
             res.json({ id: session.id });
         } catch (err) {
-            console.log('erreur', err.message);
+            console.log('erreur ===>', err.message);
         }
     }
 }

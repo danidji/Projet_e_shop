@@ -4,11 +4,11 @@ module.exports = (app) => {
     app.post('/proceder-paiement', async (req, res) => {
         let basket = req.body.basket;
         let voucher = 0;
+        // console.log(`app.pos t -> req.body.voucherRate`, req.body.voucherRate)
         if (req.body.voucherRate !== null) {
             voucher = req.body.voucherRate * 100;
             //création d'une session pour le paiement
         }
-
         let repo = new Checkout(basket, voucher);
         await repo.createSession(req, res);
     })

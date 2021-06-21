@@ -25,13 +25,26 @@ export default function BasketHover(props) {
                 <h4>Mon panier</h4>
                 <GrClose onClick={() => props.onQuit()} />
             </div>
-            <div className="basket_hover_list">
-                {getBasketList()}
-            </div>
-            <div className="total_hover">
+            {basket.length > 0
+                ? (
+                    <>
+                        <div className="basket_hover_list">
+                            {getBasketList()}
+                        </div>
+                        <div className="total_hover">
 
-                <button className="button_pay" onClick={() => props.onQuit()} ><Link to={'/panier'}>Payer</Link></button>
-            </div>
+                            <button className="button_pay" onClick={() => props.onQuit()} ><Link to={'/panier'}>Payer</Link></button>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <p>Votre panier est vide</p>
+                    </>
+                )
+
+
+            }
+
         </div>
     )
 }

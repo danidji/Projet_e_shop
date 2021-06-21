@@ -5,10 +5,56 @@
 
     .basket_hover
         display: block
+        padding: 0.5rem
         width: 20rem
-        height: 30rem
+        height: auto
+        max-height: 30rem
         background-color: #fff
         position: absolute
         right: 0
         top: 3.5rem
         color: $second-txt-color
+        overflow: auto
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px
+        &::-webkit-scrollbar
+            width: 1rem
+        h4
+            margin: 0.5rem 0
+
+        .basket_card
+            padding: .5rem
+            // width: 100%
+            display: flex
+            justify-content: space-between
+            align-items: center
+            border-bottom: solid 1px black
+            .img
+                padding: 0
+                margin: 0
+                display: flex
+                justify-content: center
+                align-items: center
+                // flex-grow: 1
+
+            .info_article
+                width: 100%
+                margin: none
+                padding: 0rem 0.5rem
+                // flex-grow: 3
+            .title
+                font-size: 1rem
+                // width: 100%
+            .price
+                display: flex
+                justify-content: space-between
+                // padding: 0.2 auto
+                align-items: center
+                .qty
+                    font-size: 1rem
+
+            .delete
+                color: red
+
+    .hover_image
+        width: auto
+        height: 8rem

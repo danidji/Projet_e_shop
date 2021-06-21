@@ -6,12 +6,9 @@ module.exports = (app) => {
         let voucher = 0;
         if (req.body.voucherRate !== null) {
             voucher = req.body.voucherRate * 100;
+            //création d'une session pour le paiement
         }
-        // console.log(`app.post -> req.body`, req.body)
-        console.log(`app.post -> voucher`, req.body.voucherName)
-        // console.log(`app.post -> req.body`, req.body)
 
-        //création d'une session pour le paiement
         let repo = new Checkout(basket, voucher);
         await repo.createSession(req, res);
     })

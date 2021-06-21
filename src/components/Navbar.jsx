@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../AppContext';
-// import BasketHover from './basket/on-hover/BasketHover';
+import BasketHover from './basket/on-hover/BasketHover';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { HomeOutlined } from '@ant-design/icons';
 
@@ -40,9 +40,9 @@ export default function Navbar(props) {
                     <li><Link className="link navbar_basket" to={'/panier'} onMouseEnter={(e) => handleHoverBasket(e)} onClick={() => handleclick()}><ShoppingCartOutlined />{context.basket.length > 0 &&
                         <span className="nb_product">{context.basket.length}</span>
                     }</Link></li>
-                    {/* {state.getHoverBasket &&
+                    {state.getHoverBasket &&
                         <BasketHover getHoverBasket={state.getHoverBasket} onMouseLeave={quitHoverBasket} />
-                    } */}
+                    }
                 </ul>
             </li>
         </ul>

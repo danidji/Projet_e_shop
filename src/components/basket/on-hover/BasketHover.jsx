@@ -11,7 +11,7 @@ export default function BasketHover(props) {
             basket.map((element, i) => {
                 console.log(`basket.map -> element`, element)
 
-                return <BasketHoverCard id={element} key={i} />
+                return <BasketHoverCard id={element.productCode} quantity={element.qty} key={i} />
             })
         )
 

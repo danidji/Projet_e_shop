@@ -26,7 +26,6 @@ export function findProduct(productCode) {
 export function findVoucher(voucherCode) {
     for (let elt of voucherDatabase) {
         if (voucherCode in elt) {
-            // console.log(`findVoucher `, elt)
 
             return elt[voucherCode]
         }

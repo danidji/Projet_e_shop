@@ -4,7 +4,8 @@ import { findProduct, findVoucher } from '../../lib/database';
 import { setCurrency } from '../../lib/utilities';
 import VoucherRate from './VoucherRate';
 import ButtonPay from './ButtonPay';
-// import { findVoucher } from '../../lib/database'
+
+
 export default function BasketTotal(props) {
 
     const [state, setState] = useState({
@@ -15,10 +16,8 @@ export default function BasketTotal(props) {
         , infoVoucher: ""
         , useVoucher: false
     })
-    // console.log(`BasketTotal -> state`, state)
 
     const context = useContext(AppContext);
-    // console.log(`BasketTotal -> context`, context)
     let basket = context.basket;
     // Retourne le total du panier
     function getTotal() {
@@ -49,7 +48,6 @@ export default function BasketTotal(props) {
         else {
             setState({ ...state, totalPrice: getTotal(), tva: getTva(getTotal()), HTprice: getTotal() - getTva(getTotal()), infoVoucher: 'Code promo non valide' });
         }
-        console.log(state);
     }
 
     //Supprimer la promo au clic sur 'X'

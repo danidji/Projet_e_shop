@@ -1,6 +1,5 @@
 import { useLocation, useParams } from 'react-router-dom';
 import React, { useContext } from 'react';
-// import clsx from 'clsx';
 import { PlusCircleOutlined } from '@ant-design/icons';
 
 import { AppContext } from '../AppContext';

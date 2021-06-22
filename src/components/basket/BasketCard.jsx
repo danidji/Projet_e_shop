@@ -1,6 +1,5 @@
 import { findProduct } from '../../lib/database';
 import SetQuantity from '../SetQuantity';
-import { CloseOutlined } from '@ant-design/icons';
 import { useContext } from 'react';
 import { AppContext } from '../../AppContext';
 import { setCurrency } from '../../lib/utilities';
@@ -8,12 +7,10 @@ import { FaRegTrashAlt } from "react-icons/fa";
 
 export default function BasketCard(props) {
     let myProduct = findProduct(props.id);
-    // console.log(`BasketCard -> myProduct`, myProduct)
 
     const context = useContext(AppContext)
 
     function handleClick(productCode) {
-        console.log(`handleClick -> productCode`, productCode)
         context.clearBasket(productCode)
     }
 

@@ -1,5 +1,4 @@
 export default function VoucherRate(props) {
-    // console.log(`VoucherRate -> props`, props)
 
     return (
         <div className="voucher_rate">

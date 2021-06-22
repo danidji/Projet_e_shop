@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AppContext } from '../../AppContext';
 import { useContext } from 'react';
-import { productDatabase } from '../../lib/database';
+
 //Utilisation de stripe - doc : https://stripe.com/docs/payments/accept-a-payment
 import { loadStripe } from '@stripe/stripe-js';
 
@@ -14,7 +14,6 @@ export default function ButtonPay(props) {
     let basket = context.basket;
     let voucherRate = context.voucherRate
     let voucherName = context.voucherName
-    // console.log(`ButtonPay -> voucherRate`, voucherRate)
 
 
     async function handleclick() {

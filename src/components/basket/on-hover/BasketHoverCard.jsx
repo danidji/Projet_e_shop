@@ -1,5 +1,4 @@
 import { findProduct } from '../../../lib/database';
-import SetQuantity from '../../SetQuantity';
 import { AppContext } from '../../../AppContext';
 import { useContext } from 'react';
 
@@ -30,7 +29,8 @@ export default function BasketHoverCard(props) {
                     {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(myProduct.unitPrice)}
 
                     <div className="qty">Qté : {props.quantity}</div>
-                    {/* <SetQuantity id={props.id} qty={props.quantity} /> */}
+
+
                     <FaRegTrashAlt className="delete" onClick={() => handleClick(myProduct.productCode)} />
 
                 </div>

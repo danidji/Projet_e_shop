@@ -1,5 +1,22 @@
-# Projet exo site de E-commerce - Initiation React 
+# Projet exo site de E-commerce 
 
-## To-do list
-- Finir un affichage du panier en hover sur l'icone panier 
-- Finir le traitement des code promo avec stripe (cas ou le paiement se fait sans coupon)
+## Fonctionnalités 
+
+    - Afficher les produits 
+    - Afficher une fiche produit
+    - Ajouter un produit au panier
+    - Visualiser le panier quand la souris passe sur l'icone panier
+    - Afficher le panier avec : 
+          - le total des produits
+          - la possibilité dechanger la quantité d'un produit
+          - supprimer un produit du panier 
+          - appliquer un code promotionnel
+          - payer le panier via Stripe
+
+
+## Techno utilisées : 
+
+    - React 
+    - Express 
+    - Sass
+

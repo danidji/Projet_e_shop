@@ -18,7 +18,7 @@ import Navbar from './components/Navbar';
 import { AppContext } from './AppContext';
 
 //import database 
-// import { findVoucher } from './lib/database'
+import { findProduct } from './lib/database'
 
 
 function App() {
@@ -115,6 +115,14 @@ function App() {
     //Supprime le code promo
     , removeVoucher: () => {
       setState({ ...state, voucherRate: null })
+    }
+
+    // Retourne le total du panier
+    , getTotal: () => {
+      let total = state.basket.map((element) => {
+        return findProduct(element.productCode).unitPrice * element.qty
+      })
+      return total.reduce((a, b) => a + b)
     }
 
   })

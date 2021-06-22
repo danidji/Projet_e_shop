@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../../AppContext';
-import { findProduct, findVoucher } from '../../lib/database';
+import { findVoucher } from '../../lib/database';
 import { setCurrency } from '../../lib/utilities';
 import VoucherRate from './VoucherRate';
 import ButtonPay from './ButtonPay';
@@ -18,14 +18,6 @@ export default function BasketTotal(props) {
     })
 
     const context = useContext(AppContext);
-    let basket = context.basket;
-    // Retourne le total du panier
-    function getTotal() {
-        let total = basket.map((element) => {
-            return findProduct(element.productCode).unitPrice * element.qty
-        })
-        return total.reduce((a, b) => a + b)
-    }
 
     function getTva(price) {
         return price * 0.05
@@ -46,14 +38,14 @@ export default function BasketTotal(props) {
         }
         //sinon je retourne le total normal    
         else {
-            setState({ ...state, totalPrice: getTotal(), tva: getTva(getTotal()), HTprice: getTotal() - getTva(getTotal()), infoVoucher: 'Code promo non valide' });
+            setState({ ...state, totalPrice: context.getTotal(), tva: getTva(context.getTotal()), HTprice: context.getTotal() - getTva(context.getTotal()), infoVoucher: 'Code promo non valide' });
         }
     }
 
     //Supprimer la promo au clic sur 'X'
     function removeVoucher() {
         context.removeVoucher();
-        setState({ ...state, totalPrice: getTotal(), tva: getTva(getTotal()), HTprice: getTotal() - getTva(getTotal()), inputValue: "", infoVoucher: "", useVoucher: false });
+        setState({ ...state, totalPrice: context.getTotal(), tva: getTva(context.getTotal()), HTprice: context.getTotal() - getTva(context.getTotal()), inputValue: "", infoVoucher: "", useVoucher: false });
     }
 
     //Enregistrement de la valeur saisie dans l'input Voucher
@@ -66,7 +58,7 @@ export default function BasketTotal(props) {
 
     //Lorsque que le panier change, on applique le nouveau total
     useEffect(() => {
-        let total = getTotal()
+        let total = context.getTotal()
         //Si j'ai un code promo d'appliqué, je l'applique sur mon total
         if (findVoucher(state.inputValue) !== false) {
             total = total - (findVoucher(state.inputValue) * total)

@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import BasketHoverCard from './BasketHoverCard';
 import { GrClose } from "react-icons/gr";
 import { Link } from 'react-router-dom';
+import { setCurrency } from '../../../lib/utilities';
 
 export default function BasketHover(props) {
     const context = useContext(AppContext);
@@ -33,8 +34,15 @@ export default function BasketHover(props) {
                         </div>
                         <div className="total_hover">
 
-                            <button className="button_pay" onClick={() => props.onQuit()} ><Link to={'/panier'}>Payer</Link></button>
+                            <div className="total">{`Total - ${setCurrency(context.getTotal())}`}</div>
+
+                            <button className="button_pay" onClick={() => props.onQuit()} ><Link className="basket_redirect" to={'/panier'}>Payer</Link></button>
                         </div>
+
+
+
+
+
                     </>
                 ) : (
                     <>
